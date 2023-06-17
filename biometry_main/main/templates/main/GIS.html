@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static%}
+    {% block js_additional %}
+    <script src="{% static 'main/js/script.js' %}"></script>
+    {% endblock %}
+    {% load static%}
+    {% block css_additional %}
+    <link rel="stylesheet" href=" {% static 'main/css/style.css' %} ">
+    {% endblock %}
+    {% load static%}
+    {% block favicon_additional %}
+    <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
+    {% endblock %}
+    <meta charset="UTF-8">
+    <title>Выбор исполнения государственных функций</title>
+</head>
+<body>
+    <noscript>Включите JavaScript в своём браузере !</noscript>
+    {% load static%}
+    {% block index_additional %}
+    <div class="logo">
+        <a href="{% url 'index' %}" class="logo-1"></a>
+    </div>
+    {% endblock %}
+
+    <div class="function-gis">
+        <div class="function-gis__block">
+            <div>
+                <button class="function-gis__floating-button">Заказать поддельный паспорт</button><br>
+                <button class="function-gis__floating-button">Заказать поддельный загранпаспорт</button><br>
+                <button class="function-gis__floating-button">Купить права</button><br>
+                <button class="function-gis__floating-button">Купить диплом</button><br>
+                <button class="function-gis__floating-button">Найти преподавателя</button><br>
+                <button class="function-gis__floating-button">Удалить себя из сети</button><br><br><br><br><br><br><br>
+                <button class="function-gis__floating-button">Comming soon ...</button><br>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

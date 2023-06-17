@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static%}
+    {% block js_additional %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'main/js/script.js' %}"></script>
+    {% endblock %}
+    {% load static%}
+    {% block css_additional %}
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    {% endblock %}
+    {% load static%}
+    {% block favicon_additional %}
+    <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
+    {% endblock %}
+    <meta charset="UTF-8">
+    <title>Вход в государственную биометрическую систему</title>
+</head>
+<body>
+    <noscript>Включите JavaScript в своём браузере !</noscript>
+    {% load static%}
+    {% block index_additional %}
+    <div class="logo">
+        <a href="{% url 'index' %}" class="logo-1"></a>
+    </div>
+    {% endblock %}
+    <div class='box'>
+        <div class='box-form'>
+            <div class='box-login-tab'></div>
+                <div class='box-login-title'>
+                    <div class='i i-login'></div>
+                        <h2>Вход</h2>
+                </div>
+                <div class='box-login'>
+                    <div class='fieldset-body' id='login_form'>
+                            {% csrf_token %}
+                            <p>
+                                <label for='user'>Логин</label>
+                                <input type='text' id='user' name='login' title='Username' />
+                                <span id='valida' class='i i-warning'></span>
+                            </p>
+                            <p class='field'>
+                                <label for='pass'>Пароль</label>
+                                <input type='password' id='pass' name='password' title='Password' />
+                                <span id='valida' class='i i-close'></span>
+                            </p>
+                                <input type="button" value="Включить микрофон" class="btn-4" onclick="sample()" />
+                                <input type="button" id="start" value="Записать образец голоса"  class="btn-4"/><br/>
+                                <input type="button" id="stop" value="Остановить запись образца голоса" class="btn-4"/>
+                                <div id="audio"></div>
+                            <input type='submit' id='do_login' value='Войти' title='Get Started' />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

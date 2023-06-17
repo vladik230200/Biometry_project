@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static%}
+    {% block js_additional %}
+    <script src="{% static 'main/js/script.js' %}"></script>
+    {% endblock %}
+    {% load static%}
+    {% block css_additional %}
+    <link rel="stylesheet" href=" {% static 'main/css/style.css' %} ">
+    {% endblock %}
+    {% load static%}
+    {% block favicon_additional %}
+    <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
+    {% endblock %}
+    <meta charset="UTF-8">
+    <title>Благодарим за регистрацию</title>
+</head>
+<body>
+    <noscript>Включите JavaScript в своём браузере !</noscript>
+    {% load static%}
+    {% block index_additional %}
+    <div class="logo">
+        <a href="{% url 'index' %}" class="logo-1"></a>
+    </div>
+    {% endblock %}
+    <div class="redirect">
+        <div class="redirect-1"></div>
+        <div></div>
+    </div>
+    <div class="btn_login">
+        <a href="{% url 'login' %}">
+            <button class="btn-3">Войти в личный кабинет</button>
+        </a>
+    </div>
+    <p></p>
+    <div class="btn_login">
+        <button class="btn-3" id="clicks" onclick="plus_click(this)">Просто кликер (можно нажимать), кнопка кафовая :)</button>
+    </div>
+</body>
+</html>

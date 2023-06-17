@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static%}
+    {% block js_additional %}
+    <script src="{% static 'main/js/script.js' %}"></script>
+    {% endblock %}
+    {% load static%}
+    {% block css_additional %}
+    <link rel="stylesheet" href=" {% static 'main/css/style.css' %} ">
+    {% endblock %}
+    {% load static%}
+    {% block favicon_additional %}
+    <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
+    {% endblock %}
+    <meta charset="UTF-8">
+    <title>Государственная биометрическая система</title>
+</head>
+<body>
+    <noscript>Включите JavaScript в своём браузере !</noscript>
+    {% load static%}
+    {% block index_additional %}
+    <div class="logo">
+        <a href="{% url 'index' %}" class="logo-1"></a>
+    </div>
+    {% endblock %}
+    <div class="Registration">
+        <a href="{% url 'registration' %}">
+            <button class="btn-1">
+                <div class="image-container-1"></div>
+                    <p>Регистрация в государственной системе</p>
+            </button>
+        </a>
+    </div>
+    <div class="Sign">
+        <a href="{% url 'login' %}">
+            <button class="btn-2">
+                <div class="image-container-2"></div>
+                    <p>Вход в государственную систему</p>
+            </button>
+        </a>
+    </div>
+
+
+
+
+
+</body>
+</html>
