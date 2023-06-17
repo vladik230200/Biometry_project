@@ -35,7 +35,19 @@ def verification(request):
             return JsonResponse(data)
 
 def verification_login(request):
-    return 1
+    if request.method == 'POST':
+        csrf_token = request.POST['csrfmiddlewaretoken']
+        login_user = request.POST["login"]
+        password_user = request.POST["password"]
+        audio = request.FILES["audio"]
+        print(request.POST)
+        print(request.FILES)
+        if len(login_user) <= 0 or len(password_user) <= 0:
+            data = {"redirect_url": "login/verification/critical"}
+            return JsonResponse(data)
+        else:
+            data = {"redirect_url": "login/verification/GIS"}
+            return JsonResponse(data)
 
 def gis(request):
     return render(request, "main/GIS.html")
