@@ -2,8 +2,13 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from main.models import users
+from main.models import users, samples
+import hashlib
 
+def password_hash(password_sha):
+    bytes_password = bytes(password_sha.encode("utf-8"))
+    password_sha = hashlib.sha256(bytes_password).hexdigest()
+    return password_sha
 
 def critical(request):
     render(request, "main/critical_404.html")
@@ -27,17 +32,17 @@ def verification(request):
     if request.method == 'POST':
         csrf_token = request.POST['csrfmiddlewaretoken']
         login_user = request.POST["login"]
-        password_user = request.POST["password"]
+        password_user = password_hash(request.POST["password"])
         audio = request.FILES
         sample_massiv = []
         for i in range(len(audio)):
             sample = audio["audio"+str(i+1)]
             sample_massiv.append(sample)
-        print(sample_massiv)
         if len(login_user) <= 0 or len(password_user) <= 0:
             data = {"redirect_url" : "registration/verification/critical"}
             return JsonResponse(data)
         else:
+            users(username = str(login_user), password = str(password_user), voice = False).save()
             data = {"redirect_url": "registration/verification/complete_registration"}
             return JsonResponse(data)
 
@@ -45,7 +50,7 @@ def verification_login(request):
     if request.method == 'POST':
         csrf_token = request.POST['csrfmiddlewaretoken']
         login_user = request.POST["login"]
-        password_user = request.POST["password"]
+        password_user = password_hash(request.POST["password"])
         audio = request.FILES
         sample_massiv = []
         for i in range(len(audio)):
