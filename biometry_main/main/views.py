@@ -35,7 +35,7 @@ def verification(request):
         print(request.FILES)
         if len(login_user) <= 0 or len(password_user) <= 0:
             data = {"redirect_url" : "registration/verification/critical"}
-            return JsonResponse(dataa)
+            return JsonResponse(data)
         else:
             data = {"redirect_url": "registration/verification/complete_registration"}
             return JsonResponse(data)
