@@ -43,9 +43,10 @@ function do_registration(){
         	formData.append('login', document.getElementById('user').value);
         	formData.append('password', document.getElementById('pass').value);
         	formData.append('csrfmiddlewaretoken', csrf_token);
-        	formData.append('audio1', sample_mass_registration[0]);
-        	formData.append('audio2', sample_mass_registration[1]);
-        	formData.append('audio3', sample_mass_registration[2]);
+        	for (var i = 0; i < sample_mass_registration.length; i++) {
+                var audio = 'audio' + (i+1);
+                formData.append(audio, sample_mass_registration[i]);
+             }
 
         	$.ajax({
         		url: 'registration/verification',
@@ -102,9 +103,10 @@ var csrf_token = document.getElementsByName("csrfmiddlewaretoken")[0].value;
         	formData.append('login', document.getElementById('user').value);
         	formData.append('password', document.getElementById('pass').value);
         	formData.append('csrfmiddlewaretoken', csrf_token);
-        	formData.append('audio1', sample_mass_login[0]);
-        	formData.append('audio2', sample_mass_login[1]);
-        	formData.append('audio3', sample_mass_login[2]);
+        	for (var i = 0; i < sample_mass_login.length; i++) {
+                var audio = 'audio' + (i+1);
+                formData.append(audio, sample_mass_login[i]);
+             }
 
         	$.ajax({
         		url: 'login/verification/',

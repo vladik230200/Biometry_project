@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
+    {% load static%}
+    {% block js_additional %}
+    <script src="{% static 'main/js/script.js' %}"></script>
+    {% endblock %}
+    {% load static%}
+    {% block css_additional %}
+    <link rel="stylesheet" href=" {% static 'main/css/style.css' %} ">
+    {% endblock %}
+    {% load static%}
+    {% block favicon_additional %}
+    <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
+    {% endblock %}
     <meta charset="UTF-8">
-    <title>Критичная ошибка</title>
+    <title>Государственная биометрическая система</title>
 </head>
 <body>
+    <noscript>Включите JavaScript в своём браузере !</noscript>
+    {% load static%}
+    {% block index_additional %}
+    <div class="logo">
+        <a href="{% url 'index' %}" class="logo-1"></a>
+    </div>
+    {% endblock %}
+                    <div class="varning-content">
+                        <p>
+                            <h1>ВНИМАНИЕ !</h1>
+                        </p>
+                        <p>
+                            <h2>Вы не ознакомились с инструкцией для входа или регистрации</h2>
+                        </p>
+                        <p>
+                            <h2>Ознакомитесь с инструкциями через соответствующие кнопки и повтроите попытку</h2>
+                            </br>
+                        </p>
+                            <a href="{% url 'index' %}">
+                                <button class="btn-5"><h3>Вернуться на главную страницу</h3></button>
+                            </a>
+                    </div>
 
-<h1>
-    Критичная ошибка
-</h1>
+
+
+
 
 </body>
 </html>

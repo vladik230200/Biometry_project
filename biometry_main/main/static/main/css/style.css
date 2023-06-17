@@ -815,3 +815,12 @@ Credits
 .btn-5:disabled:before {
 	filter: grayscale(100%);
 }
+.varning-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+}
