@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
+from main.models import users
+
 
 def critical(request):
     render(request, "main/critical_404.html")
@@ -26,7 +28,11 @@ def verification(request):
         csrf_token = request.POST['csrfmiddlewaretoken']
         login_user = request.POST["login"]
         password_user = request.POST["password"]
-        audio = request.FILES["audio"]
+        audio1 = request.FILES["audio1"]
+        audio2 = request.FILES["audio2"]
+        audio3 = request.FILES["audio3"]
+        print(request.POST)
+        print(request.FILES)
         if len(login_user) <= 0 or len(password_user) <= 0:
             data = {"redirect_url" : "registration/verification/critical"}
             return JsonResponse(data)
@@ -39,7 +45,9 @@ def verification_login(request):
         csrf_token = request.POST['csrfmiddlewaretoken']
         login_user = request.POST["login"]
         password_user = request.POST["password"]
-        audio = request.FILES["audio"]
+        audio1 = request.FILES["audio1"]
+        audio2 = request.FILES["audio2"]
+        audio3 = request.FILES["audio3"]
         print(request.POST)
         print(request.FILES)
         if len(login_user) <= 0 or len(password_user) <= 0:
