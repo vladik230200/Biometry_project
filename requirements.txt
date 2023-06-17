@@ -1,0 +1,6 @@
+Django
+django_extensions
+psycopg2
+gunicorn
+Werkzeug
+pyOpenSSL

@@ -15,7 +15,8 @@ SECRET_KEY = key_django
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = debug_project
 
-ALLOWED_HOSTS = []
+# Разрешенные хосты
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '89.108.76.206']
 
 
 # Application definition
@@ -28,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    "main"
+    'main',
+    'web_biometry'
 ]
 
 MIDDLEWARE = [

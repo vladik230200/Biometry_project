@@ -1,0 +1,15 @@
+# Конфигурация для отладки образа
+
+version: '3.4'
+
+services:
+  biometryproject:
+    image: biometryproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: biometryproject_debug
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 biometry_main/manage.py runserver 0.0.0.0:8000 --nothreading --noreload"]
+    ports:
+      - 8000:8000
+      - 5678:5678
