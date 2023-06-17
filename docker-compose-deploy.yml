@@ -1,0 +1,10 @@
+# Конфигурация для деплоя на сервере
+
+version: '3.4'
+
+services:
+  biometryproject:
+    image: ctg135/biometry_project
+    container_name: project
+    ports:
+      - 8000:443

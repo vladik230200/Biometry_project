@@ -1,0 +1,13 @@
+# Конфигурация для запуска образа локально
+
+version: '3.4'
+
+services:
+  biometryproject:
+    image: biometryproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: biometryproject
+    ports:
+      - 8000:8000
