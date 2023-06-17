@@ -50,6 +50,21 @@
                                 <input type="button" id="stop" value="Остановить запись образца голоса" class="btn-4"/>
                                 <div id="audio"></div>
                             <input type="submit" onclick="do_registration()" value='Зарегистрироваться' title='Get Started'/>
+                            <input type="submit" onclick="openPopup()" value="Инструкция по регистрации" style="margin-top: 0px;">
+                </div>
+                <div id="popup" style="display: none;">
+                    <div class="popup-content">
+                        <p style="width: 290px; text-align: left;">
+                            Для регистрации в Государственной информационной системе необходимо: <br/><br/>
+                            1. Нажать на кнопку "Включить микрофон" и подтвердить разрешение в браузере <br/><br/>
+                            2. Записать образец голоса, рекомендуется в течении 5 секунд,
+                            нажав на кнопку "Записать образец голоса", потом нажать на кнопку
+                            "Остановить запись образца голоса"<br/><br/>
+                            3. Сделать запись 3-х образцов голоса по инструкции указанной в пункте 2<br/><br/>
+                            4. Нажмите кнопку "Рарегистрироваться"
+                        </p>
+                        <button onclick="closePopup()" class="btn-5">Закрыть</button>
+                    </div>
                 </div>
             </div>
         </div>
