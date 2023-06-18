@@ -14,7 +14,7 @@
     <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
     {% endblock %}
     <meta charset="UTF-8">
-    <title>Государственная биометрическая система</title>
+    <title>Критическая ошибка</title>
 </head>
 <body>
     <noscript>Включите JavaScript в своём браузере !</noscript>
@@ -24,25 +24,28 @@
         <a href="{% url 'index' %}" class="logo-1"></a>
     </div>
     {% endblock %}
-                    <div class="varning-content">
-                        <p>
-                            <h1>ВНИМАНИЕ !</h1>
-                        </p>
-                        <p>
-                            <h2>Вы не ознакомились с инструкцией для входа или регистрации</h2>
-                        </p>
-                        <p>
-                            <h2>Ознакомитесь с инструкциями через соответствующие кнопки и повтроите попытку</h2>
-                            </br>
-                        </p>
-                            <a href="{% url 'index' %}">
-                                <button class="btn-5"><h3>Вернуться на главную страницу</h3></button>
-                            </a>
-                    </div>
-
-
-
-
-
+    <div class="varning-content">
+        <p>
+            <h1>ВНИМАНИЕ !</h1>
+        </p>
+        <p>
+            <h2>Вы не ознакомились с инструкцией для входа или регистрации</h2>
+        </p>
+        <p>
+            <h2>Ознакомитесь с инструкциями через соответствующие кнопки и повтроите попытку</h2>
+        <br>
+        </p>
+        <a href="{% url 'index' %}">
+            <button class="btn-5"><h3>Вернуться на главную страницу</h3></button>
+        </a>
+        </br>
+        <a href="{% url 'registration' %}">
+            <button class="btn-5"><h3>Вернуться на страницу регистрации</h3></button>
+        </a>
+        </br>
+        <a href="{% url 'login' %}">
+            <button class="btn-5"><h3>Вернуться на страницу входа</h3></button>
+        </a>
+    </div>
 </body>
 </html>

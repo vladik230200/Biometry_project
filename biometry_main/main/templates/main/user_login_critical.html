@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
     {% load static%}
     {% block js_additional %}
@@ -14,7 +14,7 @@
     <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
     {% endblock %}
     <meta charset="UTF-8">
-    <title>Благодарим за регистрацию</title>
+    <title>Критическая ошибка</title>
 </head>
 <body>
     <noscript>Включите JavaScript в своём браузере !</noscript>
@@ -24,17 +24,19 @@
         <a href="{% url 'index' %}" class="logo-1"></a>
     </div>
     {% endblock %}
-    <div class="redirect">
-        <div class="redirect-1"></div>
-    </div>
-    <div class="btn_login">
+    <div class="varning-content">
+        <p>
+            <h1>ВНИМАНИЕ !</h1>
+        </p>
+        <p>
+            <h2>Для входа введены не корректные данные</h2>
+        <p>
+            <h2>Проверьте корректность введенных данных и повторите попытку</h2>
+            </br>
+        </p>
         <a href="{% url 'login' %}">
-            <button class="btn-3">Войти в личный кабинет</button>
+            <button class="btn-5"><h3>Вернуться на страницу входа в систему</h3></button>
         </a>
-    </div>
-    <p></p>
-    <div class="btn_login">
-        <button class="btn-3" id="clicks" onclick="plus_click(this)">Просто кликер (можно нажимать), кнопка кафовая :)</button>
     </div>
 </body>
 </html>

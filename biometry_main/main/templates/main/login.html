@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
     {% endblock %}
     <meta charset="UTF-8">
-    <title>Вход в государственную биометрическую систему</title>
+    <title>Вход</title>
 </head>
 <body>
     <noscript>Включите JavaScript в своём браузере !</noscript>
@@ -28,52 +28,56 @@
     <div class='box'>
         <div class='box-form'>
             <div class='box-login-tab'></div>
-                <div class='box-login-title'>
-                    <div class='i i-login'></div>
-                        <h2>Вход</h2>
+            <div class='box-login-title'>
+                <div class='i i-login'></div>
+                <h2>Вход</h2>
+            </div>
+            <div class='box-login'>
+                <div class='fieldset-body' id='login_form'>
+                    {% csrf_token %}
+                    <h4>
+                        Внимание! <br>
+                        Все пробелы удаляются <br>
+                        автоматически после нажатия <br>
+                        на кнопку "Вход"
+                    </h4>
+                    <p>
+                        <label for='user'>Логин</label>
+                        <input type='text' id='user' name='login' title='Username' />
+                        <span id='valida' class='i i-warning'></span>
+                    </p>
+                    <p class='field'>
+                        <label for='pass'>Пароль</label>
+                        <input type='password' id='pass' name='password' title='Password' />
+                        <span id='valida' class='i i-close'></span>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    <input type="button" value="Включить микрофон" class="btn-4" onclick="sample_login()" />
+                    <input type="button" id="start" value="Записать образец голоса"  class="btn-4"/><br/>
+                    <input type="button" id="stop" value="Остановить запись образца голоса" class="btn-4"/>
+                    <div id="audio"></div>
+                    <input type='submit' onclick="do_login()" value='Войти' title='Get Started' />
+                    <input type="submit" onclick="openPopup()" value="Инструкция по входу" style="margin-top: 0px;">
                 </div>
-                <div class='box-login'>
-                    <div class='fieldset-body' id='login_form'>
-                            {% csrf_token %}
-                            <p>
-                                <label for='user'>Логин</label>
-                                <input type='text' id='user' name='login' title='Username' />
-                                <span id='valida' class='i i-warning'></span>
-                            </p>
-                            <p class='field'>
-                                <label for='pass'>Пароль</label>
-                                <input type='password' id='pass' name='password' title='Password' />
-                                <span id='valida' class='i i-close'></span>
-                                <br><br><br><br>
-                            </p>
-                                <input type="button" value="Включить микрофон" class="btn-4" onclick="sample_login()" />
-                                <input type="button" id="start" value="Записать образец голоса"  class="btn-4"/><br/>
-                                <input type="button" id="stop" value="Остановить запись образца голоса" class="btn-4"/>
-                                <div id="audio"></div>
-                            <input type='submit' onclick="do_login()" value='Войти' title='Get Started' />
-                            <input type="submit" onclick="openPopup()" value="Инструкция по входу" style="margin-top: 0px;">
+                <div id="popup" style="display: none;">
+                    <div class="popup-content">
+                        <p style="width: 290px; text-align: left;">
+                            Для входа в Государственную информационную систему необходимо: <br><br>
+                            1. Ввести логин и пароль от системы <br><br>
+                            2. Нажать на кнопку "Включить микрофон" и подтвердить разрешение в браузере <br><br>
+                            3. Записать образец голоса, нажав на кнопку "Записать образец голоса", потом нажать на кнопку
+                            "Остановить запись образца голоса" (рекомендуется записывать голос в течении 5 секунд)<br><br>
+                            4. Сделать запись ОДНОГО образца голоса по инструкции указанной в пункте 2<br><br>
+                            5. Нажмите кнопку "Войти"
+                        </p>
+                        <button onclick="closePopup()" class="btn-5">Закрыть</button>
                     </div>
-                    <div id="popup" style="display: none;">
-                        <div class="popup-content">
-                            <p style="width: 290px; text-align: left;">
-                                Для входа в Государственную информационную систему необходимо: <br/><br/>
-                                1. Ввести логин и пароль от системы <br><br>
-                                2. Нажать на кнопку "Включить микрофон" и подтвердить разрешение в браузере <br/><br/>
-                                3. Записать образец голоса, нажав на кнопку "Записать образец голоса", потом нажать на кнопку
-                                "Остановить запись образца голоса" (рекомендуется записывать голос в течении 5 секунд)
-                                <br/><br/>
-                                4. Сделать запись не менее 3-х образцов голоса по инструкции указанной в пункте 2<br/><br/>
-                                5. Нажмите кнопку "Войти"
-                            </p>
-                            <button onclick="closePopup()" class="btn-5">Закрыть</button>
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
 </body>
 </html>

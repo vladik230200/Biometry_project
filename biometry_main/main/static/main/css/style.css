@@ -23,7 +23,7 @@ body {
 .Registration {
     display: flex;
     justify-content: center;
-    padding-top: 10%;
+    padding-top: 2%;
     position: relative
 }
 .btn_login{
@@ -452,10 +452,9 @@ Login Box
 ---------------------*/
 
 .box {
-  padding-top: 200px;
+  margin-top: 20%;
   width: 330px;
   position: absolute;
-  top: 50%;
   left: 50%;
   
   -webkit-transform: translate(-50%, -50%);
@@ -817,7 +816,19 @@ Credits
 }
 .varning-content {
     position: absolute;
-    top: 50%;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.welcome-content {
+    opacity: .9;
+    width: 1000px;
+    position: absolute;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;

@@ -14,7 +14,7 @@
     <link rel="shortcut icon" type="image/png" href=" {% static 'main/img/100.png' %} ">
     {% endblock %}
     <meta charset="UTF-8">
-    <title>Государственная биометрическая система</title>
+    <title>Государственная информационная система</title>
 </head>
 <body>
     <noscript>Включите JavaScript в своём браузере !</noscript>
@@ -24,26 +24,31 @@
         <a href="{% url 'index' %}" class="logo-1"></a>
     </div>
     {% endblock %}
-    <div class="Registration">
-        <a href="{% url 'registration' %}">
-            <button class="btn-1">
-                <div class="image-container-1"></div>
+    <div class="welcome-content">
+        <p>
+            <h1>
+                Мы рады привествовать Вас на нашем сайте!
+            </h1>
+        </p>
+        <h2>
+            Выберите необходимую функцию:
+        </h2>
+        <div class="Registration">
+            <a href="{% url 'registration' %}">
+                <button class="btn-1">
+                    <div class="image-container-1"></div>
                     <p>Регистрация в государственной системе</p>
-            </button>
-        </a>
-    </div>
-    <div class="Sign">
-        <a href="{% url 'login' %}">
-            <button class="btn-2">
-                <div class="image-container-2"></div>
+                </button>
+            </a>
+        </div>
+        <div class="Sign">
+            <a href="{% url 'login' %}">
+                <button class="btn-2">
+                    <div class="image-container-2"></div>
                     <p>Вход в государственную систему</p>
-            </button>
-        </a>
+                </button>
+            </a>
+        </div>
     </div>
-
-
-
-
-
 </body>
 </html>
