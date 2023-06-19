@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
-from main.models import users, samples
+from main.models import users
 import hashlib
 import string
 from django.core.files.storage import default_storage
@@ -57,6 +57,13 @@ def verification(request):
         else:
             if len(login_user_check) == 0:
                 users(username = str(login_user), password = str(password_hash(password_user)), voice = False).save()
+
+
+
+
+
+
+
                 data = {"redirect_url": "registration/verification/complete_registration"}
                 return JsonResponse(data)
             else:
@@ -84,6 +91,12 @@ def verification_login(request):
             else:
                 if (user_by_login_sql[0].username == login_user and \
                         user_by_login_sql[0].password == password_hash(password_user)):
+
+
+
+
+
+
                     data = {"redirect_url": "login/verification/GIS"}
                     return JsonResponse(data)
                 else:
