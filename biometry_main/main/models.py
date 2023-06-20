@@ -8,3 +8,4 @@ class users(models.Model):
 class samples(models.Model):
     username = models.CharField(max_length=30, blank=False)
     sample = models.BinaryField(default=b"")
+    features = models.JSONField()
