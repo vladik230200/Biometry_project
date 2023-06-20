@@ -55,7 +55,7 @@ def verification(request):
             sample = audio["audio" + str(i + 1)]
             sample_massiv.append(sample)
         login_user_check = users.objects.filter(username=login_user)
-        login_user_check = [] # For debug
+        # login_user_check = [] # For debug
         if len(login_user) <= 0 or len(password_user) <= 0 or len(sample_massiv) < 3:
             data = {"redirect_url" : "registration/verification/critical"}
             return JsonResponse(data)
@@ -71,10 +71,12 @@ def verification(request):
                 # 2. Полученную инфу сохраняю в БД и удаляю файл
                 # 3. Выгружаю из БД все features и переобучаю модель
                 # 4. Сохраняю модель
+                i = 0
                 for file in sample_massiv:
-                    file_name = utils.get_temp_filename()
+                    file_name = utils.get_temp_filename(str(i))
                     print(file_name)
                     utils.save(file_name, file)
+                    i = i + 1
                 data = {"redirect_url": "registration/verification/complete_registration"}
                 return JsonResponse(data)
             else:
