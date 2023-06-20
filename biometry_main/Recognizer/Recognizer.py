@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from typing import Tuple
 import numpy as np
+import librosa
 
 class Recognizer:
     '''
@@ -24,7 +25,9 @@ class Recognizer:
 
         Возвращает `ndarray(dtype=numpy.float32)`
         '''
-        pass
+        x, sr = librosa.load(file_name)
+        mfccs = librosa.feature.mfcc(y=x, sr=sr, n_mfcc=self.features_count)
+        return np.mean(mfccs, axis=1)
 
     def save(self, login: str, features) -> None:
         '''

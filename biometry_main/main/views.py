@@ -8,7 +8,9 @@ import hashlib
 import string
 from django.core.files.storage import default_storage
 from . import utils
-from web_biometry import settings
+from Recognizer import Recognizer
+
+import matplotlib.pyplot as plt
 
 
 def critical(request):
@@ -51,8 +53,8 @@ def verification(request):
         password_user = request.POST["password"].translate({ord(c): None for c in string.whitespace})
         audio = request.FILES
         sample_massiv = []
-        for i in range(len(audio)):
-            sample = audio["audio" + str(i + 1)]
+        for seed in range(len(audio)):
+            sample = audio["audio" + str(seed + 1)]
             sample_massiv.append(sample)
         login_user_check = users.objects.filter(username=login_user)
         # login_user_check = [] # For debug
@@ -61,8 +63,8 @@ def verification(request):
             return JsonResponse(data)
         else:
             if len(login_user_check) == 0:
-                print('Вошли')
                 users(username = str(login_user), password = str(password_hash(password_user)), voice = False).save()
+
                 # TODO 
                 # Можно доделать логику с 5 секундными семплами
                 # TODO 
@@ -71,12 +73,14 @@ def verification(request):
                 # 2. Полученную инфу сохраняю в БД и удаляю файл
                 # 3. Выгружаю из БД все features и переобучаю модель
                 # 4. Сохраняю модель
-                i = 0
+                seed = 0
                 for file in sample_massiv:
-                    file_name = utils.get_temp_filename(str(i))
-                    print(file_name)
+                    seed = seed + 1
+                    file_name = utils.get_temp_filename(str(seed))
                     utils.save(file_name, file)
-                    i = i + 1
+                    features = Recognizer.Recognizer('').extract_features(file_name)
+                    print(features)
+                    utils.remove_file(file_name)
                 data = {"redirect_url": "registration/verification/complete_registration"}
                 return JsonResponse(data)
             else:

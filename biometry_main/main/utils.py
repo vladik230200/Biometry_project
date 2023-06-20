@@ -19,3 +19,9 @@ def get_temp_filename(seed: str = '') -> str:
     '''
     date = bytes((datetime.now().isoformat() + seed).encode('utf-8'))
     return os.path.join(settings.VOICE_FILES, hashlib.md5(date).hexdigest() + '.wav')
+
+def remove_file(file_name: str) -> None:
+    '''
+    Функция удаления файла
+    '''
+    if os.path.exists(file_name): os.remove(file_name)

@@ -12,8 +12,9 @@ ENV PYTHONUNBUFFERED=1
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
+RUN apt install ffmpeg -y
 
-WORKDIR /app
+WORKDIR /
 COPY . /app
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
