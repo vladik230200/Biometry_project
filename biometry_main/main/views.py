@@ -61,15 +61,8 @@ def verification(request):
         else:
             if len(login_user_check) == 0:
                 users(username = str(login_user), password = str(password_hash(password_user)), voice = False).save()
-
                 # TODO 
                 # Можно доделать логику с 5 секундными семплами
-                # TODO 
-                # Логика для регистрации с тремя семплами
-                # 1. Сохраняю семпл во временном файле и выгружаю из него features
-                # 2. Полученную инфу сохраняю в БД и удаляю файл
-                # 3. Выгружаю из БД все features и переобучаю модель
-                # 4. Сохраняю модель
                 seed = 0
                 recognizer = Recognizer.Recognizer(settings.DEFAULT_MODEL_FILE)
                 for file in sample_massiv:
@@ -119,18 +112,18 @@ def verification_login(request):
             else:
                 if (user_by_login_sql[0].username == login_user and \
                         user_by_login_sql[0].password == password_hash(password_user)):
-                        # TODO
-                        # Логика авторизации с одним семплом
-                        # 1. Сохраняю файл и выгружаю features
-                        # 2. Запускаю обученную модель и провожу веификацию
-                        # 3. Обрабатываю результат работы модели (да/нет)
-
-
-
-
-
-                    data = {"redirect_url": "login/verification/GIS"}
-                    return JsonResponse(data)
+                    recognizer = Recognizer.Recognizer(settings.DEFAULT_MODEL_FILE)
+                    file_name = utils.get_temp_filename()
+                    utils.save(file_name, sample_massiv[0])
+                    recognizer.load_model()
+                    features = recognizer.extract_features(file_name)
+                    utils.remove_file(file_name)
+                    if recognizer.verify(login_user, features):
+                        data = {"redirect_url": "login/verification/GIS"}
+                        return JsonResponse(data)
+                    else:
+                        data = {"redirect_url": "login/verification/user_login_critical"}
+                        return JsonResponse(data)
                 else:
                     data = {"redirect_url": "login/verification/user_login_critical"}
                     return JsonResponse(data)

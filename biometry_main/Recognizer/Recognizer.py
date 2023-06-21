@@ -42,6 +42,7 @@ class Recognizer:
         '''
         self.model = RandomForestClassifier()
         self.model.fit(self.features*5, self.user_names*5)
+        print('Model trained')
 
     def predict(self, features: np.ndarray) -> Tuple[str, int]:
         '''
@@ -51,13 +52,14 @@ class Recognizer:
         '''
         user_name = self.model.predict([features])[0]
         probabilty = np.max(self.model.predict_proba([features]))
+        print(f'Predicted [{user_name} {probabilty}]')
         return user_name, probabilty
 
     def verify(self, user_name: str, features: np.ndarray) -> bool:
         '''
         Функция для проверки голоса пользователя
         '''
-        user, probability = self.predict(user_name, features)
+        user, probability = self.predict(features)
         return user_name == user and probability >= self.predict_threshold
     
     def save_model(self):
