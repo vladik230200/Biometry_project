@@ -12,10 +12,13 @@ ENV PYTHONUNBUFFERED=1
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
-RUN apt install ffmpeg -y
+# RUN apt install ffmpeg -y
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y ffmpeg
 
-WORKDIR /
+WORKDIR /app
 COPY . /app
+
+RUN mkdir /app/biometry_main/temp
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
