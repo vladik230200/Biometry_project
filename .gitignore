@@ -44,3 +44,7 @@ coverage.xml
 *.pot
 # Sphinx documentation
 docs/_build/
+# Project
+biometry_main/temp
+biometry_main/Recognizer/model
+migrations/

@@ -1,4 +1,5 @@
 **/__pycache__
+**/venv
 **/.venv
 **/.classpath
 **/.dockerignore
@@ -28,5 +29,6 @@
 **/values.dev.yaml
 LICENSE
 README.md
-
-
+biometry_main/Recognizer/model
+biometry_main/temp
+**/migrations
