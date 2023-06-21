@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from typing import Tuple
 import numpy as np
-import librosa
+import librosa, joblib
 
 class Recognizer:
     '''
@@ -13,7 +13,7 @@ class Recognizer:
                 predict_threshold: float = 0.5,
                 features_count: int = 40) -> None:
         self.features = []
-        self.logins = []
+        self.user_names = []
         self.model = None
         self.model_file_name = model_file_name
         self.predict_threshold = predict_threshold
@@ -29,41 +29,48 @@ class Recognizer:
         mfccs = librosa.feature.mfcc(y=x, sr=sr, n_mfcc=self.features_count)
         return np.mean(mfccs, axis=1)
 
-    def save(self, login: str, features) -> None:
+    def save(self, user_name: str, features: np.ndarray) -> None:
         '''
         Функция созранения в модель логина и характеристик сигнала
         '''
-        pass
+        self.user_names.append(user_name)
+        self.features.append(features)
 
     def train(self) -> None:
         '''
         Функция обучения модели на загруженных записях
         '''
-        pass
+        self.model = RandomForestClassifier()
+        self.model.fit(self.features*5, self.user_names*5)
 
-    def predict(self, features) -> Tuple[str, int]:
+    def predict(self, features: np.ndarray) -> Tuple[str, int]:
         '''
         Функция предсказания голоса
 
         Возвращает предсказанный логин и вероятность предсказания
         '''
-        pass
+        user_name = self.model.predict([features])[0]
+        probabilty = np.max(self.model.predict_proba([features]))
+        return user_name, probabilty
 
-    def verify(self, login: str, features) -> bool:
+    def verify(self, user_name: str, features: np.ndarray) -> bool:
         '''
         Функция для проверки голоса пользователя
         '''
-        pass
-
+        user, probability = self.predict(user_name, features)
+        return user_name == user and probability >= self.predict_threshold
+    
     def save_model(self):
         '''
         Сохраненияе дампа модели в память
         '''
-        pass
+        joblib.dump(self.model, self.model_file_name)
+        print('Model saved!')
 
     def load_model(self):
         '''
         Выгрузка дампа модели из памяти
         '''
-        pass
+        self.model = joblib.load(self.model_file_name)
+        print('Model loaded')
 

@@ -1,17 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import View
-from django.views.decorators.csrf import csrf_exempt
-from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
-from main.models import users
+from main.models import users, samples
 import hashlib
 import string
-from django.core.files.storage import default_storage
+import json
+import base64
+import numpy as np
 from . import utils
 from Recognizer import Recognizer
-
-import matplotlib.pyplot as plt
-
+from web_biometry import settings
 
 def critical(request):
     render(request, "main/critical_404.html")
@@ -74,13 +71,27 @@ def verification(request):
                 # 3. Выгружаю из БД все features и переобучаю модель
                 # 4. Сохраняю модель
                 seed = 0
+                recognizer = Recognizer.Recognizer(settings.DEFAULT_MODEL_FILE)
                 for file in sample_massiv:
                     seed = seed + 1
                     file_name = utils.get_temp_filename(str(seed))
                     utils.save(file_name, file)
-                    features = Recognizer.Recognizer('').extract_features(file_name)
-                    print(features)
+                    features = recognizer.extract_features(file_name)
+                    sample = samples()
+                    sample.id_user = users.objects.filter(username=login_user)[0]
+                    sample.features = json.dumps(features, cls=utils.NumpyArrayEncoder)
+                    # TODO не сохраняет бинарно, но возвращает b''
+                    sample.sample = file.read()
+                    sample.save()
                     utils.remove_file(file_name)
+                # Переобучение модели
+                for sample in samples.objects.all():
+                    features = json.loads(sample.features)
+                    features = np.asanyarray(features)
+                    recognizer.save(sample.id_user.username, features)
+                recognizer.train()
+                recognizer.save_model()
+
                 data = {"redirect_url": "registration/verification/complete_registration"}
                 return JsonResponse(data)
             else:

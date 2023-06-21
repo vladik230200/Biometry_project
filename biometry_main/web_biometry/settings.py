@@ -120,4 +120,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Папка для сохранения временных файлов
 VOICE_FILES = os.path.join(BASE_DIR, 'temp')
+
+# Путь до дампа модели авторизации
+DEFAULT_MODEL_FILE = os.path.join(BASE_DIR, 'Recognizer', 'model')
